@@ -15,17 +15,18 @@ class AmericaSpider(scrapy.Spider):
         # Selector(response.text).xpath('').extract()
 
         # 获取剧集名
-        movies = response.xpath('//html/body/div[3]/div[4]/div[1]/ul/li')
+        movies = response.xpath('//ul[@class="top-list  fn-clear"]/li')
         # /h5/text()
         for move in movies:
 
             # . 表示在子标签上进行解析
             # xpath().extract返回[things(), things()]
             # xpath().extract_first()返回'things'
-            name = move.xpath('./h5/text()').extract_first()
+            name = move.xpath('./h5/a/text()').extract_first()
+            # print(name)
 
             item = Scrapy2Item()
-            item.name = name    # item["name"] = name
+            item["name"] = name    # item.name = name
             yield item      # 相当于return
 
 

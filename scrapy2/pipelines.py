@@ -17,5 +17,5 @@ class Scrapy2Pipeline(object):
         # 爬虫部分在for循环中yield item，所以process_item会重复执行
         # open(mode="a")追加模式("w"模式会覆盖之前的信息)
         with open("movie.txt", "a", encoding="UTF-8") as f:
-            f.write(str(item.name) + "\n")
+            f.write(str(item["name"]) + "\n")
         return item
